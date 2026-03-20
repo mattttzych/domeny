@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  domain-finder:
+    build: .
+    container_name: domain-finder
+    restart: always
+    ports:
+      - "3456:3456"
+    environment:
+      - NODE_ENV=production
+    labels:
+      - "coolify.managed=true"
