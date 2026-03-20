@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DomainFinder — Inteligentne wyszukiwanie domen</title>
+  <meta name="description"
+    content="Znajdź idealną domenę .pl i .com na podstawie słów kluczowych. Sprawdź dostępność domeny w czasie rzeczywistym.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Animated background -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="url(#logoGrad)" stroke-width="2.5" />
+            <ellipse cx="16" cy="16" rx="8" ry="14" stroke="url(#logoGrad)" stroke-width="2" />
+            <line x1="2" y1="16" x2="30" y2="16" stroke="url(#logoGrad)" stroke-width="2" />
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0%" stop-color="#6366f1" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">Domain<span class="logo-accent">Finder</span></span>
+      </div>
+      <p class="header-sub">Inteligentne wyszukiwanie dostępnych domen</p>
+    </header>
+
+    <!-- Main search section -->
+    <main class="main">
+      <section class="hero">
+        <h1 class="hero-title">
+          Znajdź swoją idealną
+          <span class="gradient-text">domenę</span>
+        </h1>
+        <p class="hero-desc">Wpisz słowa kluczowe, a my dynamicznie wygenerujemy i sprawdzimy najlepsze propozycje domen
+          <strong>.pl</strong> i <strong>.com</strong></p>
+      </section>
+
+      <!-- Search form -->
+      <section class="search-section">
+        <div class="search-card">
+          <div class="keywords-input-area">
+            <label class="input-label">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 7h.01M7 17h.01M17 7h.01M12 12h.01M12 7h.01M12 17h.01M7 12h.01M17 12h.01M17 17h.01" />
+              </svg>
+              Słowa kluczowe
+            </label>
+            <div class="keywords-container" id="keywordsContainer">
+              <div class="keywords-tags" id="keywordsTags"></div>
+              <input type="text" id="keywordInput" class="keyword-input" placeholder="Wpisz słowo i naciśnij Enter..."
+                autocomplete="off">
+            </div>
+            <p class="input-hint">Naciśnij <kbd>Enter</kbd> lub <kbd>,</kbd> aby dodać słowo kluczowe. Dodaj minimum 1
+              słowo.</p>
+          </div>
+
+          <div class="extensions-area">
+            <label class="input-label">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path
+                  d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              Rozszerzenia
+            </label>
+            <div class="extensions-list">
+              <label class="ext-toggle active" data-ext="pl">
+                <input type="checkbox" checked value="pl">
+                <span class="ext-badge">.pl</span>
+              </label>
+              <label class="ext-toggle active" data-ext="com">
+                <input type="checkbox" checked value="com">
+                <span class="ext-badge">.com</span>
+              </label>
+              <label class="ext-toggle active" data-ext="com.pl">
+                <input type="checkbox" checked value="com.pl">
+                <span class="ext-badge">.com.pl</span>
+              </label>
+              <label class="ext-toggle" data-ext="eu">
+                <input type="checkbox" value="eu">
+                <span class="ext-badge">.eu</span>
+              </label>
+              <label class="ext-toggle" data-ext="net">
+                <input type="checkbox" value="net">
+                <span class="ext-badge">.net</span>
+              </label>
+              <label class="ext-toggle" data-ext="org">
+                <input type="checkbox" value="org">
+                <span class="ext-badge">.org</span>
+              </label>
+              <label class="ext-toggle" data-ext="io">
+                <input type="checkbox" value="io">
+                <span class="ext-badge">.io</span>
+              </label>
+              <label class="ext-toggle" data-ext="dev">
+                <input type="checkbox" value="dev">
+                <span class="ext-badge">.dev</span>
+              </label>
+            </div>
+          </div>
+
+          <button id="searchBtn" class="search-btn" disabled>
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <span>Szukaj domen</span>
+            <div class="btn-shimmer"></div>
+          </button>
+        </div>
+      </section>
+
+      <!-- Quick suggestions -->
+      <section class="quick-suggestions" id="quickSuggestions" style="display:none;">
+        <p class="suggestions-label">Popularne zestawy:</p>
+        <div class="suggestion-chips">
+          <button class="suggestion-chip" data-keywords="lekarz,krakow,wizyta">🏥 lekarz + kraków + wizyta</button>
+          <button class="suggestion-chip" data-keywords="pizza,dostawa,warszawa">🍕 pizza + dostawa + warszawa</button>
+          <button class="suggestion-chip" data-keywords="fitness,trener,online">💪 fitness + trener + online</button>
+          <button class="suggestion-chip" data-keywords="fotograf,slub,wroclaw">📸 fotograf + ślub + wrocław</button>
+          <button class="suggestion-chip" data-keywords="sklep,meble,design">🛋️ sklep + meble + design</button>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section class="results-section" id="resultsSection" style="display:none;">
+        <div class="results-header">
+          <h2 class="results-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            Wyniki wyszukiwania
+          </h2>
+          <div class="results-stats">
+            <span class="stat" id="statTotal">0 domen sprawdzonych</span>
+            <span class="stat stat-available" id="statAvailable">0 dostępnych</span>
+          </div>
+          <div class="results-filters">
+            <button class="filter-btn active" data-filter="all">Wszystkie</button>
+            <button class="filter-btn" data-filter="available">✅ Dostępne</button>
+            <button class="filter-btn" data-filter="taken">❌ Zajęte</button>
+          </div>
+        </div>
+        <div class="results-grid" id="resultsGrid"></div>
+      </section>
+
+      <!-- Loading state -->
+      <section class="loading-section" id="loadingSection" style="display:none;">
+        <div class="loading-card">
+          <div class="loader">
+            <div class="loader-globe">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="28" stroke="url(#loaderGrad)" stroke-width="2" opacity="0.3" />
+                <circle cx="32" cy="32" r="28" stroke="url(#loaderGrad)" stroke-width="3" stroke-dasharray="40 140"
+                  class="loader-arc" />
+                <ellipse cx="32" cy="32" rx="16" ry="28" stroke="url(#loaderGrad)" stroke-width="1.5" opacity="0.4" />
+                <line x1="4" y1="32" x2="60" y2="32" stroke="url(#loaderGrad)" stroke-width="1.5" opacity="0.4" />
+                <defs>
+                  <linearGradient id="loaderGrad" x1="0" y1="0" x2="64" y2="64">
+                    <stop offset="0%" stop-color="#6366f1" />
+                    <stop offset="100%" stop-color="#a855f7" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+          <h3 class="loading-title">Sprawdzam domeny...</h3>
+          <p class="loading-desc">Generuję kombinacje i weryfikuję dostępność</p>
+          <div class="loading-progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <p class="loading-count" id="loadingCount">0 / 0</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>DomainFinder © 2026 — Sprawdzanie dostępności przez DNS lookup</p>
+      <p class="footer-note">⚠️ Wyniki opierają się na analizie rekordów DNS. Dla pewności zweryfikuj dostępność u
+        rejestratora.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
